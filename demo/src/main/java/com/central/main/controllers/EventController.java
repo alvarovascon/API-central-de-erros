@@ -1,8 +1,7 @@
 package com.central.main.controllers;
 
-import com.central.main.DTOs.EventsDTO;
-import com.central.main.entity.Events;
-import com.central.main.service.EventsService;
+import com.central.main.entity.Event;
+import com.central.main.service.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,21 +12,21 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/errors")
-public class EventsController {
+public class EventController {
 
-    private EventsService eventsService;
+    private EventService eventService;
 
-    public EventsController(EventsService eventsService) {
-        this.eventsService = eventsService;
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
     }
 
     @GetMapping
-    public ResponseEntity<List<Events>> findAll() {
+    public ResponseEntity<List<Event>> findAll() {
 //        List<Events> eventsList = this.eventsService.findAll();
 //        return new ResponseEntity<List<Events>>(new List<EventsDTO(eventsList.stream().map(event -> {
 //            event.get
 //        }))>, HttpStatus.OK);
-        return new ResponseEntity<>(this.eventsService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.eventService.findAll(), HttpStatus.OK);
     }
 //    @GetMapping
 //    public ResponseEntity<QuoteDTO> getQuote() {

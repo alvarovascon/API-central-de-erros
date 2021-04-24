@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventsDTO {
+public class EventDTO {
 
     private Long id;
     private String level;
