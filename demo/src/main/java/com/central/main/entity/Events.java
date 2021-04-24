@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @Table
-public class Errors {
+public class Events {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
