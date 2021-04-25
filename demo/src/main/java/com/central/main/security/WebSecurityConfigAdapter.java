@@ -1,6 +1,7 @@
 package com.central.main.security;
 
 import com.central.main.DTOs.UserDTO;
+import com.central.main.entity.User;
 import com.central.main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

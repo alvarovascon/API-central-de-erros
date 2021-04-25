@@ -10,9 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -21,6 +22,11 @@ public class UserController {
     @GetMapping
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<User> findById(@PathVariable Long id) {
+        return userRepository.findById(id);
     }
 
 }

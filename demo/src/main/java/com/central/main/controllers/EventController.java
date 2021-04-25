@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/errors")
 public class EventController {
 
-    private EventService eventService;
+    private final EventService eventService;
 
     public EventController(EventService eventService) {
         this.eventService = eventService;

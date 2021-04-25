@@ -11,10 +11,9 @@ public class UserDTO implements UserDetails {
 
     private Long id;
 
+    private final String email;
 
-    private String email;
-
-    private String password;
+    private final String password;
     public UserDTO(Optional<User> user) {
         this.email = user.get().getEmail();
         this.password = user.get().getPassword();
