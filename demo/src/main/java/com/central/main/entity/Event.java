@@ -47,5 +47,5 @@ public class Event {
     @Column
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp eventDate;
+    private String eventDate;
 }

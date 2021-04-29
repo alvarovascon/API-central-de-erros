@@ -5,6 +5,7 @@ import com.central.main.repository.EventRepository;
 import com.central.main.service.EventService;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,6 @@ public class EventServiceImpl implements EventService {
         this.eventRepository = eventRepository;
     }
 
-    @Override
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
@@ -25,4 +25,20 @@ public class EventServiceImpl implements EventService {
     public Optional<Event> findById(Long id) { return eventRepository.findById(id);}
 
     public List<Event> findByLevel(String level) { return eventRepository.findByLevel(level); }
+
+    public List<Event> findByLog(String log) {
+        return eventRepository.findByLog(log);
+    }
+
+    public List<Event> findByOrigin(String origin) {
+        return eventRepository.findByOrigin(origin);
+    }
+
+    public List<Event> findByEventDateContaining(String date) {
+        return eventRepository.findByEventDateContaining(date);
+    }
+
+    public Integer getByLevelCount(String level) {
+        return eventRepository.getByLevelCount(level);
+    }
 }
