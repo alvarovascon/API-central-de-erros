@@ -6,6 +6,7 @@ import com.central.main.service.EventService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -20,4 +21,8 @@ public class EventServiceImpl implements EventService {
     public List<Event> findAll() {
         return eventRepository.findAll();
     }
+
+    public Optional<Event> findById(Long id) { return eventRepository.findById(id);}
+
+    public List<Event> findByLevel(String level) { return eventRepository.findByLevel(level); }
 }
