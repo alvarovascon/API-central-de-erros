@@ -22,16 +22,10 @@ public class EventController {
 
     @GetMapping
     public ResponseEntity<List<Event>> findAll() {
-//        List<Events> eventsList = this.eventsService.findAll();
-//        return new ResponseEntity<List<Events>>(new List<EventsDTO(eventsList.stream().map(event -> {
-//            event.get
-//        }))>, HttpStatus.OK);
+
         return new ResponseEntity<>(this.eventService.findAll(), HttpStatus.OK);
     }
-//    @GetMapping
-//    public ResponseEntity<QuoteDTO> getQuote() {
-//        Quote quote = quoteService.getQuote();
-//        return new ResponseEntity<QuoteDTO>(new QuoteDTO(quote.getId(), quote.getActor(), quote.getQuote()), HttpStatus.OK);
-//    }
+
+
 
 }
