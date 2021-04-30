@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @Table
-public class Errors {
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,5 +47,5 @@ public class Errors {
     @Column
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp eventDate;
+    private String eventDate;
 }
