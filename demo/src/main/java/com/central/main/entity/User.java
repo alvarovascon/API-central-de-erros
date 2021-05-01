@@ -21,7 +21,7 @@ public class User {
     @Column
     @Email
     @NotNull
-    @NotBlank(message = "Email can't be blank")
+    @NotBlank
     private String email;
 
     @Column
