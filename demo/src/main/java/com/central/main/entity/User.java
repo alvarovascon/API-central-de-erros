@@ -1,15 +1,13 @@
 package com.central.main.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.Collection;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -22,8 +20,12 @@ public class User {
 
     @Column
     @Email
+    @NotNull
+    @NotBlank(message = "Email can't be blank")
     private String email;
 
     @Column
+    @NotNull
+    @NotBlank
     private String password;
 }

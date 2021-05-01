@@ -2,8 +2,11 @@ package com.central.main.controllers;
 
 import com.central.main.DTOs.EventDTO;
 import com.central.main.Model.EventPage;
+import com.central.main.advice.ResourceNotFoundException;
 import com.central.main.entity.Event;
 import com.central.main.service.EventService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +53,11 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Event>> findById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(this.eventService.findById(id), HttpStatus.OK);
+    @ApiResponses(value = {@ApiResponse(code = 404, message = "Event not found"),
+            @ApiResponse(code = 200, message = "Event found")})
+    public ResponseEntity<Event> findById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(this.eventService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("event")) , HttpStatus.OK);
     }
 
     @GetMapping("level/{level}")

@@ -17,6 +17,6 @@ public class EventDTO {
     private String level;
     private String description;
     private String origin;
-    private Timestamp eventDate;
+    private String eventDate;
 
 }
