@@ -1,11 +1,15 @@
 package com.central.main.controllers;
 
 import com.central.main.DTOs.EventDTO;
+import com.central.main.Model.EventPage;
 import com.central.main.entity.Event;
 import com.central.main.service.EventService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/errors")
+@RequestMapping("/events")
 public class EventController {
 
     @Autowired
@@ -37,9 +41,12 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EventDTO>> findAll() {
-        List<Event> eventList = this.eventService.findAll();
-        return new ResponseEntity<>(eventList.stream().map(event -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    public ResponseEntity<Page<EventDTO>> findAll(EventPage eventPage) {
+        Page<Event> events = this.eventService.findAll(eventPage);
+        List<EventDTO> eventList =  events.stream().map(event
+                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        Page<EventDTO> page = new PageImpl<>(eventList);
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -47,29 +54,40 @@ public class EventController {
         return new ResponseEntity<>(this.eventService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/level/{levelName}")
-    public ResponseEntity<List<EventDTO>> findByLevel(@PathVariable("levelName") String level) {
-        List<Event> eventList = this.eventService.findByLevel(level);
-        return new ResponseEntity<>(eventList.stream().map(event -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    @GetMapping("level/{level}")
+    public ResponseEntity<Page<EventDTO>> findByLevel(@PathVariable("level") String level, EventPage eventPage) {
+        Page<Event> events = this.eventService.findByLevel(level, eventPage);
+        List<EventDTO> eventList =  events.stream().map(event
+                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        Page<EventDTO> page = new PageImpl<>(eventList);
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
-    // log origem data
-    @GetMapping("/log/{logInfo}")
-    public ResponseEntity<List<EventDTO>> findByLog(@PathVariable("logInfo") String log) {
-        List<Event> eventList = this.eventService.findByLog(log);
-        return new ResponseEntity<>(eventList.stream().map(event -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    @GetMapping("/log/{log}")
+    public ResponseEntity<Page<EventDTO>> findByLog(@PathVariable("log") String log, EventPage eventPage) {
+        Page<Event> events = this.eventService.findByLog(log, eventPage);
+        List<EventDTO> eventList =  events.stream().map(event
+                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        Page<EventDTO> page = new PageImpl<>(eventList);
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @GetMapping("/origin/{origin}")
-    public ResponseEntity<List<EventDTO>> findByOrigin(@PathVariable("origin") String origin) {
-        List<Event> eventList = this.eventService.findByOrigin(origin);
-        return new ResponseEntity<>(eventList.stream().map(event -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    public ResponseEntity<Page<EventDTO>> findByOrigin(@PathVariable("origin") String origin, EventPage eventPage) {
+        Page<Event> events = this.eventService.findByOrigin(origin, eventPage);
+        List<EventDTO> eventList =  events.stream().map(event
+                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        Page<EventDTO> page = new PageImpl<>(eventList);
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<EventDTO>> findByDate(@PathVariable("date") String date) {
-        List<Event> eventList = this.eventService.findByEventDateContaining(date);
-        return new ResponseEntity<>(eventList.stream().map(event -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList()), HttpStatus.OK);
+    public ResponseEntity<Page<EventDTO>> findByDate(@PathVariable("date") String date, EventPage eventPage) {
+        Page<Event> events = this.eventService.findByEventDateContaining(date, eventPage);
+        List<EventDTO> eventList = events.stream().map(event
+                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        Page<EventDTO> page = new PageImpl<>(eventList);
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     @GetMapping("/count/{level}")

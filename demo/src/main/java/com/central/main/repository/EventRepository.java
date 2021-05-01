@@ -1,29 +1,28 @@
 package com.central.main.repository;
 
+
 import com.central.main.entity.Event;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EventRepository extends CrudRepository<Event, Long> {
-
-    List<Event> findAll();
+public interface EventRepository extends PagingAndSortingRepository<Event, Long> {
 
     Optional<Event> findById(Long id);
 
-    List<Event> findByLevel(String level);
+    Page<Event> findByLevel(String level, Pageable pageable);
 
-    List<Event> findByLog(String log);
+    Page<Event> findByLog(String log, Pageable pageable);
 
-    List<Event> findByOrigin(String origin);
+    Page<Event> findByOrigin(String origin, Pageable pageable);
 
-    List<Event> findByEventDateContaining(String date);
+    Page<Event> findByEventDateContaining(String date, Pageable pageable);
 
     @Query(value = "SELECT count(*) FROM event WHERE level = :level",
             nativeQuery = true)

@@ -1,24 +1,24 @@
 package com.central.main.service;
 
 
+import com.central.main.Model.EventPage;
 import com.central.main.entity.Event;
+import org.springframework.data.domain.Page;
 
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 public interface EventService {
-    List<Event> findAll();
+    Page<Event> findAll(EventPage eventPage);
 
     Optional<Event> findById(Long id);
 
-    List<Event> findByLevel(String level);
+    Page<Event> findByLevel(String level, EventPage eventPage);
 
-    List<Event> findByLog(String log);
+    Page<Event> findByLog(String log, EventPage eventPage);
 
-    List<Event> findByOrigin(String origin);
+    Page<Event> findByOrigin(String origin, EventPage eventPage);
 
-    List<Event> findByEventDateContaining(String date);
+    Page<Event> findByEventDateContaining(String date, EventPage eventPage);
 
     Integer getByLevelCount(String level);
 }

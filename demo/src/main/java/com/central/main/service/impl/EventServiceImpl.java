@@ -1,8 +1,13 @@
 package com.central.main.service.impl;
 
+import com.central.main.Model.EventPage;
 import com.central.main.entity.Event;
 import com.central.main.repository.EventRepository;
 import com.central.main.service.EventService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -10,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl implements EventService{
 
     public EventRepository eventRepository;
 
@@ -18,24 +23,36 @@ public class EventServiceImpl implements EventService {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> findAll() {
-        return eventRepository.findAll();
+    public Page<Event> findAll(EventPage eventPage) {
+        Sort sort = Sort.by(eventPage.getDirection(), eventPage.getSortBy());
+        Pageable pageable = PageRequest.of(eventPage.getPageNumber(), eventPage.getPageSize(), sort);
+        return eventRepository.findAll(pageable);
     }
 
     public Optional<Event> findById(Long id) { return eventRepository.findById(id);}
 
-    public List<Event> findByLevel(String level) { return eventRepository.findByLevel(level); }
-
-    public List<Event> findByLog(String log) {
-        return eventRepository.findByLog(log);
+    public Page<Event> findByLevel(String level, EventPage eventPage) {
+        Sort sort = Sort.by(eventPage.getDirection(), eventPage.getSortBy());
+        Pageable pageable = PageRequest.of(eventPage.getPageNumber(), eventPage.getPageSize(), sort);
+        return eventRepository.findByLevel(level, pageable);
     }
 
-    public List<Event> findByOrigin(String origin) {
-        return eventRepository.findByOrigin(origin);
+    public Page<Event> findByLog(String log, EventPage eventPage) {
+        Sort sort = Sort.by(eventPage.getDirection(), eventPage.getSortBy());
+        Pageable pageable = PageRequest.of(eventPage.getPageNumber(), eventPage.getPageSize(), sort);
+        return eventRepository.findByLog(log, pageable);
     }
 
-    public List<Event> findByEventDateContaining(String date) {
-        return eventRepository.findByEventDateContaining(date);
+    public Page<Event> findByOrigin(String origin, EventPage eventPage) {
+        Sort sort = Sort.by(eventPage.getDirection(), eventPage.getSortBy());
+        Pageable pageable = PageRequest.of(eventPage.getPageNumber(), eventPage.getPageSize(), sort);
+        return eventRepository.findByOrigin(origin, pageable);
+    }
+
+    public Page<Event> findByEventDateContaining(String date, EventPage eventPage) {
+        Sort sort = Sort.by(eventPage.getDirection(), eventPage.getSortBy());
+        Pageable pageable = PageRequest.of(eventPage.getPageNumber(), eventPage.getPageSize(), sort);
+        return eventRepository.findByEventDateContaining(date, pageable);
     }
 
     public Integer getByLevelCount(String level) {
