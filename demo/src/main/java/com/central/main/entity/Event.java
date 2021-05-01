@@ -8,9 +8,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -26,26 +28,30 @@ public class Event {
 
     @Column
     @NotNull
+    @NotBlank
     @Size(max = 100)
     private String level;
 
     @Column
     @NotNull
+    @NotBlank
     @Size(max = 100)
     private String description;
 
     @Column
     @NotNull
+    @NotBlank
     @Size(max = 255)
     private String log;
 
     @Column
     @NotNull
+    @NotBlank
     @Size(max = 100)
     private String origin;
 
     @Column
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private String eventDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private Date eventDate;
 }

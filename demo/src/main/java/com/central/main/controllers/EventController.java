@@ -4,7 +4,9 @@ import com.central.main.DTOs.EventDTO;
 import com.central.main.Model.EventPage;
 import com.central.main.advice.ResourceNotFoundException;
 import com.central.main.entity.Event;
+import com.central.main.entity.User;
 import com.central.main.service.EventService;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
@@ -15,11 +17,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -99,5 +99,12 @@ public class EventController {
     @GetMapping("/count/{level}")
     public ResponseEntity<Integer> getByLevelCount(@PathVariable("level") String level) {
         return new ResponseEntity<>(this.eventService.getByLevelCount(level), HttpStatus.OK);
+    }
+
+    @PostMapping
+    @ApiOperation("Register new event")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "New event successfully registered")})
+    public ResponseEntity<Event> create(@Valid @RequestBody Event event) {
+        return new ResponseEntity<Event>(this.eventService.save(event), HttpStatus.CREATED);
     }
 }

@@ -21,4 +21,6 @@ public interface EventService {
     Page<Event> findByEventDateContaining(String date, EventPage eventPage);
 
     Integer getByLevelCount(String level);
+
+    Event save(Event event);
 }

@@ -10,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -57,5 +55,10 @@ public class EventServiceImpl implements EventService{
 
     public Integer getByLevelCount(String level) {
         return eventRepository.getByLevelCount(level);
+    }
+
+    @Override
+    public Event save(Event event) {
+        return eventRepository.save(event);
     }
 }
