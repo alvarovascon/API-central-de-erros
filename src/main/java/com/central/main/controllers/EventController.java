@@ -43,13 +43,16 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    private Page<EventDTO> getDTOsPage (Page<Event> events) {
+        List<EventDTO> eventList =  events.stream().map(event
+                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
+        return new PageImpl<>(eventList);
+    }
+
     @GetMapping
     public ResponseEntity<Page<EventDTO>> findAll(EventPage eventPage) {
         Page<Event> events = this.eventService.findAll(eventPage);
-        List<EventDTO> eventList =  events.stream().map(event
-                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
-        Page<EventDTO> page = new PageImpl<>(eventList);
-        return new ResponseEntity<>(page, HttpStatus.OK);
+        return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -63,37 +66,25 @@ public class EventController {
     @GetMapping("level/{level}")
     public ResponseEntity<Page<EventDTO>> findByLevel(@PathVariable("level") String level, EventPage eventPage) {
         Page<Event> events = this.eventService.findByLevel(level, eventPage);
-        List<EventDTO> eventList =  events.stream().map(event
-                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
-        Page<EventDTO> page = new PageImpl<>(eventList);
-        return new ResponseEntity<>(page, HttpStatus.OK);
+        return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/log/{log}")
     public ResponseEntity<Page<EventDTO>> findByLog(@PathVariable("log") String log, EventPage eventPage) {
         Page<Event> events = this.eventService.findByLog(log, eventPage);
-        List<EventDTO> eventList =  events.stream().map(event
-                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
-        Page<EventDTO> page = new PageImpl<>(eventList);
-        return new ResponseEntity<>(page, HttpStatus.OK);
+        return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/origin/{origin}")
     public ResponseEntity<Page<EventDTO>> findByOrigin(@PathVariable("origin") String origin, EventPage eventPage) {
         Page<Event> events = this.eventService.findByOrigin(origin, eventPage);
-        List<EventDTO> eventList =  events.stream().map(event
-                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
-        Page<EventDTO> page = new PageImpl<>(eventList);
-        return new ResponseEntity<>(page, HttpStatus.OK);
+        return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/date/{date}")
     public ResponseEntity<Page<EventDTO>> findByDate(@PathVariable("date") String date, EventPage eventPage) {
         Page<Event> events = this.eventService.findByEventDateContaining(date, eventPage);
-        List<EventDTO> eventList = events.stream().map(event
-                -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
-        Page<EventDTO> page = new PageImpl<>(eventList);
-        return new ResponseEntity<>(page, HttpStatus.OK);
+        return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/count/{level}")
