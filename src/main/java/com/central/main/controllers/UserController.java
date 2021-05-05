@@ -22,19 +22,25 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private final String SUCCESS = "SUCCESS";
+
     @GetMapping
+    @ApiOperation("Lista usuários cadastrados")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = SUCCESS)})
     public List<User> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
+    @ApiOperation("Busca usuários por id")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = SUCCESS)})
     public Optional<User> findById(@PathVariable Long id) {
         return userService.findById(id);
     }
 
     @PostMapping
-    @ApiOperation("Register new user")
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "New user successfully registered")})
+    @ApiOperation("Registra novo usuário")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = SUCCESS)})
     public ResponseEntity<User> create(@Valid @RequestBody User user) {
         return new ResponseEntity<User>(this.userService.save(user), HttpStatus.CREATED);
     }

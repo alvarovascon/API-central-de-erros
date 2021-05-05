@@ -27,9 +27,13 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Nome",
-                "Descrição",
-                "Versão",
+                "API-Central-de-erros",
+                "API desenvolvida com o intuito de centralizar registros de erros de aplicações. " +
+                        "É possivel listar eventos e usuários do sistema. É possível também " +
+                        "buscar eventos de acordo com os campos (level, " +
+                        " descrição, log, origem e data). Todas as buscas suportam paginação e " +
+                        "ordenação por qualquer um dos campos.",
+                "V0.1",
                 "Termos de serviço",
                 null,
                 "Licença",
