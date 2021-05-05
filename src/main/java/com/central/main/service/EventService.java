@@ -5,6 +5,7 @@ import com.central.main.Model.EventPage;
 import com.central.main.entity.Event;
 import org.springframework.data.domain.Page;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 public interface EventService {
@@ -18,7 +19,7 @@ public interface EventService {
 
     Page<Event> findByOrigin(String origin, EventPage eventPage);
 
-    Page<Event> findByEventDateContaining(String date, EventPage eventPage);
+    Page<Event> findByEventDateContaining(Timestamp date, EventPage eventPage);
 
     Integer getByLevelCount(String level);
 

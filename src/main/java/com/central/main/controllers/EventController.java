@@ -82,7 +82,7 @@ public class EventController {
     }
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<Page<EventDTO>> findByDate(@PathVariable("date") String date, EventPage eventPage) {
+    public ResponseEntity<Page<EventDTO>> findByDate(@PathVariable("date") Timestamp date, EventPage eventPage) {
         Page<Event> events = this.eventService.findByEventDateContaining(date, eventPage);
         return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }

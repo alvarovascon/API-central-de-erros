@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @Service
@@ -47,7 +48,7 @@ public class EventServiceImpl implements EventService{
         return eventRepository.findByOrigin(origin, pageable);
     }
 
-    public Page<Event> findByEventDateContaining(String date, EventPage eventPage) {
+    public Page<Event> findByEventDateContaining(Timestamp date, EventPage eventPage) {
         Sort sort = Sort.by(eventPage.getDirection(), eventPage.getSortBy());
         Pageable pageable = PageRequest.of(eventPage.getPageNumber(), eventPage.getPageSize(), sort);
         return eventRepository.findByEventDateContaining(date, pageable);

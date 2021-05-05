@@ -9,6 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 @Repository
@@ -22,7 +23,9 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
 
     Page<Event> findByOrigin(String origin, Pageable pageable);
 
-    Page<Event> findByEventDateContaining(String date, Pageable pageable);
+    @Query(value = "SELECT * FROM event WHERE event_date = :date",
+            nativeQuery = true)
+    Page<Event> findByEventDateContaining(@Param("date") Timestamp date, Pageable pageable);
 
     @Query(value = "SELECT count(*) FROM event WHERE level = :level",
             nativeQuery = true)
