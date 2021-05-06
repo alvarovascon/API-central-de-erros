@@ -13,7 +13,7 @@ Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em se
 - 🛡 A consulta de listagem não retorna os LOGs dos Eventos.
 - 📦 Permite a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico.
 
-## 📦 Desenvolvimento
+## 🔧 Instalação
 
 Clone localmente:
 
@@ -23,97 +23,89 @@ $ cd API-central-de-erros
 $ mvn clean install
 $ mvn spring-boot:run
 ```
+Para testar a aplicação acesse http://localhost:8080/
+
+## 📦 Deploy
+
+https://api-central-de-erros-java.herokuapp.com/
+
 
 ### 📋 Tabelas de endpoints
 
-| Endpoint | Verbo | Função | Retorno |
-| :---: | :---: | :---: | :---: |
-| /events | GET | Lista eventos de erro | |
-| /events | POST | Registra novo evento de erro | |
-| /events/{id} | GET | Busca evento de erro por id | |
-| /events/level/count/{level} | GET | Retorna número de eventos por nível | |
-| /events/date/{date} | GET | Busca eventos por data | |
-| /events/level/{level} | GET | Busca eventos por nível(level) | |
-| /events/log/{log} | GET | Busca eventos por log | |
-| /events/origin/{origin} | GET | Busca eventos por origem | |
-| /user | GET | Lista usuários cadastrados | |
-| /user | POST | Registra novo usuário | |
-| /user/{id} | GET | Busca usuários por id | |
+| Endpoint | Verbo | Função |
+| :--- | :---: | :---: |
+| /events | GET | Lista eventos de erro | 
+| /events | POST | Registra novo evento de erro |
+| /oauth/token + parametros  | GET | Autentica/Solicita token |
+| /events/{id} | GET | Busca evento de erro por id | 
+| /events/level/count/{level} | GET | Retorna número de eventos por nível | 
+| /events/date/{date} | GET | Busca eventos por data | 
+| /events/level/{level} | GET | Busca eventos por nível(level) | 
+| /events/log/{log} | GET | Busca eventos por log | 
+| /events/origin/{origin} | GET | Busca eventos por origem | 
+| /user | GET | Lista usuários cadastrados | 
+| /user | POST | Registra novo usuário | 
+| /user/{id} | GET | Busca usuários por id | 
 
 ## 📌 Documentação
 
 Documentação da API disponivel em https://api-central-de-erros-java.herokuapp.com/swagger-ui.html#/
 
-
-### 🔧 Instalação
-
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
-
-```
-Dar exemplos
-```
-
-E repita:
-
-```
-Até finalizar
-```
-
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
-
-## ⚙️ Executando os testes
-
-Explicar como executar os testes automatizados para este sistema.
-
-### 🔩 Analise os testes de ponta a ponta
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
+* [Java 8](https://docs.oracle.com/javase/8/) - Linguagem de programação
 * [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
+* [PostgreSQL 10](https://www.postgresql.org/) - Banco de Dados
+* [Spring Boot](https://spring.io/projects/spring-boot) - Framework
+* [Swagger](https://swagger.io/) - Documentação API
 
-## 🖇️ Colaborando
+## ✒️ Autores
 
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/alvarovascon"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/69821227?v=4" width="100px;" alt=""/><br /><sub><b>Álvaro Vasconcelos</b></sub></a><br /><a href="https://github.com/alvarovascon" title="Álvaro Vasconcelos"></a></td>
+        <td align="center"><a href="https://github.com/zezomenon"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/59895062?v=4" width="100px;" alt=""/><br /><sub><b>Israel Menon</b></sub></a><br /><a href="https://github.com/zezomenon" title="Israel Menon"></a></td>
+    <td align="center"><a href="https://github.com/Letsft"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/69821892?s=400&u=be0329d3ad2d8b19523267a9a988d453bee7a918&v=4" width="100px;" alt=""/><br /><sub><b>Letícia Ferreira Teixeira</b></sub></a><br /><a href="https://github.com/Letsft" title="Letícia Ferreira Teixeira"></a></td>
+    <td align="center"><a href="https://github.com/Jr3564"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/66075313?v=4" width="100px;" alt=""/><br /><sub><b>Rodolfo Martins</b></sub></a><br /><a href="https://github.com/Jr3564" title="Rodolfo Martins"></a></td>
+  </tr>
+</table>
 
 ## 📌 Versão
 
 Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
 
-## ✒️ Autores
-
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
 
 ## 📄 Licença
 
 Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
 
-## 🎁 Expressões de gratidão
+## **:star2: AGRADECIMENTOS**
 
-* Conte a outras pessoas sobre este projeto 📢
-* Convide alguém da equipe para uma cerveja 🍺 
-* Obrigado publicamente 🤓.
-* etc.
+<div align=center>
+
+<table style="width:100%">
+  <tr align=center>
+    <th><strong>CI&T</strong></th>
+    <th><strong>trybe</strong></th>
+    <th><strong>codenation</strong></th>
+  </tr>
+  <tr align=center>
+    <td>
+      <a href="https://www.ciandt.com/">
+        <img width="200" src="https://brasscom.org.br/wp-content/uploads/2019/08/Logo-CIT-com-identidade-visual.jpg">
+      </a>
+    </td>
+    <td>
+      <a href="https://www.betrybe.com">
+        <img width="200" height="180" src="https://pbs.twimg.com/profile_images/1335930580010225667/cFKy_fC3_400x400.jpg">
+      </a>
+    </td>
+    <td>
+      <a href="https://www.codenation.dev">
+        <img width="200" height="180" src="https://yt3.ggpht.com/ytc/AAUvwnhDuX53Uk1pTu5EvEU6ZaRYzDcTAyxh3LQ6AHnmXA=s900-c-k-c0x00ffffff-no-rj">
+      </a>
+    </td>
+  </tr>
+</table>
+
+</div>
