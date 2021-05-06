@@ -15,7 +15,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/user/**").authenticated()
-                .antMatchers(HttpMethod.GET, "/events/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/events/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/events/**").authenticated();
     }
 }
