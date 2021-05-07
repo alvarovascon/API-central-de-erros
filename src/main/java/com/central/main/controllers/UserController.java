@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -42,6 +43,7 @@ public class UserController {
     @ApiOperation("Registra novo usuário")
     @ApiResponses(value = {@ApiResponse(code = 201, message = SUCCESS)})
     public ResponseEntity<User> create(@Valid @RequestBody User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return new ResponseEntity<User>(this.userService.save(user), HttpStatus.CREATED);
     }
 
