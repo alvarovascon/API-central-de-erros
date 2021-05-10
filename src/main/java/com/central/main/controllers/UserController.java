@@ -50,13 +50,13 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation("Exclui um usuário baseado no seu id")
+    @ApiOperation("Exclui um usuário baseado no id")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id) throws EmptyResultDataAccessException {
         try {
             this.userService.deleteById(id);
-            return new ResponseEntity<>("Usuário deletado", HttpStatus.OK);
+            return new ResponseEntity<>("Usuário excluído com sucesso", HttpStatus.OK);
         } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Usuário não encontrado", HttpStatus.NOT_FOUND);
         }
     }
 }
