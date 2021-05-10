@@ -1,12 +1,14 @@
 package com.central.main.controllers;
 
 
+import com.central.main.advice.ResourceNotFoundException;
 import com.central.main.entity.User;
 import com.central.main.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,8 +50,13 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
-        this.userService.deleteById(id);
-        return new ResponseEntity<>("Usuário deletado", HttpStatus.OK);
+    @ApiOperation("Exclui um usuário baseado no seu id")
+    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) throws EmptyResultDataAccessException {
+        try {
+            this.userService.deleteById(id);
+            return new ResponseEntity<>("Usuário deletado", HttpStatus.OK);
+        } catch (EmptyResultDataAccessException emptyResultDataAccessException) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
