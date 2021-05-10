@@ -43,6 +43,9 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    private final String NOT_FOUND = "Não encontrado";
+    private final String SUCCESS = "SUCCESS";
+
     private Page<EventDTO> getDTOsPage (Page<Event> events) {
         List<EventDTO> eventList =  events.stream().map(event
                 -> modelMapper.map(event, EventDTO.class)).collect(Collectors.toList());
@@ -50,51 +53,70 @@ public class EventController {
     }
 
     @GetMapping
+    @ApiOperation("Lista eventos de erro")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findAll(EventPage eventPage) {
         Page<Event> events = this.eventService.findAll(eventPage);
         return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = "Event not found"),
-            @ApiResponse(code = 200, message = "Event found")})
+    @ApiOperation("Busca evento de erro por id")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Event> findById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(this.eventService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("event")) , HttpStatus.OK);
     }
 
     @GetMapping("level/{level}")
+    @ApiOperation("Busca eventos por nível(level)")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByLevel(@PathVariable("level") String level, EventPage eventPage) {
         Page<Event> events = this.eventService.findByLevel(level, eventPage);
         return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/log/{log}")
+    @ApiOperation("Busca eventos por log")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByLog(@PathVariable("log") String log, EventPage eventPage) {
         Page<Event> events = this.eventService.findByLog(log, eventPage);
         return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/origin/{origin}")
+    @ApiOperation("Busca eventos por origem")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByOrigin(@PathVariable("origin") String origin, EventPage eventPage) {
         Page<Event> events = this.eventService.findByOrigin(origin, eventPage);
         return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/date/{date}")
+    @ApiOperation("Busca eventos por data")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByDate(@PathVariable("date") Timestamp date, EventPage eventPage) {
         Page<Event> events = this.eventService.findByEventDateContaining(date, eventPage);
         return new ResponseEntity<>(getDTOsPage(events), HttpStatus.OK);
     }
 
     @GetMapping("/count/{level}")
+    @ApiOperation("Retorna número de eventos por nível")
+    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+            @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Integer> getByLevelCount(@PathVariable("level") String level) {
         return new ResponseEntity<>(this.eventService.getByLevelCount(level), HttpStatus.OK);
     }
 
     @PostMapping
-    @ApiOperation("Register new event")
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "New event successfully registered")})
+    @ApiOperation("Registra novo evento de erro")
+    @ApiResponses(value = {@ApiResponse(code = 201, message = SUCCESS)})
     public ResponseEntity<Event> create(@Valid @RequestBody Event event) {
         return new ResponseEntity<Event>(this.eventService.save(event), HttpStatus.CREATED);
     }

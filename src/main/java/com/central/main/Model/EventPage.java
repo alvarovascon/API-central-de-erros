@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 @NoArgsConstructor
 public class EventPage {
     private int pageNumber = 0;
-    private int pageSize = 3;
+    private int pageSize = 10;
     private Sort.Direction direction = Sort.Direction.ASC;
     private String sortBy = "id";
 
