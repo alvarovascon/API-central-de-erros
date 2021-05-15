@@ -27,7 +27,7 @@ $ cd API-central-de-erros
 $ mvn clean install
 $ mvn spring-boot:run
 ```
-Para testar a aplicação acesse http://localhost:8080/user, deve retornar um array vazio.
+Para testar a aplicação acesse http://localhost:8080/, deve retornar uma mensagem com o link da documentação.
 
 ---
 
@@ -69,6 +69,7 @@ Documentação da API disponivel em https://api-central-de-erros-java.herokuapp.
 * [PostgreSQL 10](https://www.postgresql.org/) - Banco de Dados
 * [Spring Boot](https://spring.io/projects/spring-boot) - Framework
 * [Swagger](https://swagger.io/) - Documentação API
+* [JUnit](https://junit.org/junit4/) - Testes Unitários
 
 ---
 
