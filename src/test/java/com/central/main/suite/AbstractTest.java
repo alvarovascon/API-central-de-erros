@@ -2,6 +2,8 @@ package com.central.main.suite;
 
 import org.junit.Ignore;
 
+import java.sql.Timestamp;
+
 @Ignore
 public class AbstractTest {
 
@@ -10,10 +12,6 @@ public class AbstractTest {
 
     public static class UserIds {
         public static Long ONE = 1L;
-        public static Long TWO = 2L;
-        public static Long THREE = 3L;
-        public static Long FOUR = 4L;
-        public static Long FIVE = 5L;
 
         public UserIds() {
         }
@@ -21,10 +19,6 @@ public class AbstractTest {
 
     public static class UserEmails {
         public static String EMAIL_ONE = "admin@admin.com";
-        public static String EMAIL_TWO = "alvaro@gmail.com";
-        public static String EMAIL_THREE = "israel@gmail.com";
-        public static String EMAIL_FOUR = "leticia@gmail.com";
-        public static String EMAIL_FIVE = "rodolfo@gmail.com";
 
         public UserEmails() {
         }
@@ -32,8 +26,6 @@ public class AbstractTest {
 
     public static class EventIds {
         public static Long ONE = 1L;
-        public static Long TWO = 2L;
-        public static Long THREE = 3L;
 
         public EventIds() {
         }
@@ -41,7 +33,22 @@ public class AbstractTest {
 
     public static class EventLevels {
         public static String WARNING = "warning";
-        public static String INFO = "info";
-        public static String ERROR = "error";
+
+    }
+
+    public static class EventLogs {
+        public static String LOG = "log";
+
+    }
+
+    public static class EventOrigins {
+        public static String ORIGIN = "origin";
+
+    }
+
+    public static class EventDates {
+        static String text = "2011-10-02 18:48:05";
+        static Timestamp ts = Timestamp.valueOf(text);
+        public static Timestamp DATE = ts;
     }
 }

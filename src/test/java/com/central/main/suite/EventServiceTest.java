@@ -8,12 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -25,7 +21,6 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@AutoConfigureMockMvc
 @Sql({"/event_service_test.sql"})
 @ActiveProfiles("test")
 public class EventServiceTest {
@@ -44,20 +39,20 @@ public class EventServiceTest {
 
     private Event getEvent() {
         Event event = new Event();
-        event.setLevel("level");
+        event.setLevel("warning");
         event.setDescription("description");
         event.setLog("log");
-        event.setOrigin("origin");
+        event.setOrigin("origin2");
         event.setEventDate(LocalDateTime.now());
         return event;
     }
 
     private void assertEvent(Event result) {
         Assert.assertThat(result.getId(), Matchers.notNullValue());
-        Assert.assertThat(result.getLevel(), Matchers.equalTo("level"));
+        Assert.assertThat(result.getLevel(), Matchers.equalTo("warning"));
         Assert.assertThat(result.getDescription(), Matchers.equalTo("description"));
         Assert.assertThat(result.getLog(), Matchers.equalTo("log"));
-        Assert.assertThat(result.getOrigin(), Matchers.equalTo("origin"));
+        Assert.assertThat(result.getOrigin(), Matchers.equalTo("origin2"));
         Assert.assertThat(result.getEventDate(), Matchers.notNullValue());
     }
 
@@ -89,6 +84,34 @@ public class EventServiceTest {
     public void whenFindByLevel() {
         Page<Event> result = this.eventService.findByLevel(AbstractTest.EventLevels.WARNING, getPageable());
         Assert.assertThat(result.getContent(), Matchers.hasSize(2));
+    }
+
+    @Test
+    @Transactional
+    public void whenFindByLog() {
+        Page<Event> result = this.eventService.findByLog(AbstractTest.EventLogs.LOG, getPageable());
+        Assert.assertThat(result.getContent(), Matchers.hasSize(3));
+    }
+
+    @Test
+    @Transactional
+    public void whenFindByOrigin() {
+        Page<Event> result = this.eventService.findByOrigin(AbstractTest.EventOrigins.ORIGIN, getPageable());
+        Assert.assertThat(result.getContent(), Matchers.hasSize(2));
+    }
+
+    @Test
+    @Transactional
+    public void whenFindByEventDateContaining() {
+        Page<Event> result = this.eventService.findByEventDateContaining(AbstractTest.EventDates.DATE, getPageable());
+        Assert.assertThat(result.getContent(), Matchers.hasSize(2));
+    }
+
+    @Test
+    @Transactional
+    public void whenGetByLevelCount() {
+        Integer result = this.eventService.getByLevelCount(AbstractTest.EventLevels.WARNING);
+        Assert.assertThat(result, Matchers.equalTo(2));
     }
 
 }
