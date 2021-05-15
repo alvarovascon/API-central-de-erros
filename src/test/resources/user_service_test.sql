@@ -1,17 +1,17 @@
-delete
-from users;
+DELETE
+FROM users;
 
-insert into users (id, email, password)
-values (1, 'admin@admin.com', '1234567');
+INSERT INTO users (id, email, password)
+VALUES (1, 'admin@admin.com', '1234567');
 
-insert into users (id, email, password)
-values (2, 'alvaro@gmail.com', '123');
+INSERT INTO users (id, email, password)
+VALUES (2, 'alvaro@gmail.com', '123');
 
-insert into users (id, email, password)
-values (3, 'israel@gmail.com', '1234');
+INSERT INTO users (id, email, password)
+VALUES (3, 'israel@gmail.com', '1234');
 
-insert into users (id, email, password)
-values (4, 'leticia@gmail.com', '12345');
+INSERT INTO users (id, email, password)
+VALUES (4, 'leticia@gmail.com', '12345');
 
-insert into users (id, email, password)
-values (5, 'rodolfo@gmail.com', '123456');
+INSERT INTO users (id, email, password)
+VALUES (5, 'rodolfo@gmail.com', '123456');
