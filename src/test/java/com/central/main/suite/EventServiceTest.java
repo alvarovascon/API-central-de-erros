@@ -33,7 +33,7 @@ public class EventServiceTest {
     @Autowired
     private EventService eventService;
 
-    private EventPage getPages() {
+    private EventPage getPageable() {
         EventPage eventPage = new EventPage();
         eventPage.setPageNumber(0);
         eventPage.setPageSize(10);
@@ -80,7 +80,15 @@ public class EventServiceTest {
     @Test
     @Transactional
     public void whenFindAll() {
-        Page<Event> result = this.eventService.findAll(getPages());
+        Page<Event> result = this.eventService.findAll(getPageable());
         Assert.assertThat(result.getContent(), Matchers.hasSize(3));
     }
+
+    @Test
+    @Transactional
+    public void whenFindByLevel() {
+        Page<Event> result = this.eventService.findByLevel(AbstractTest.EventLevels.WARNING, getPageable());
+        Assert.assertThat(result.getContent(), Matchers.hasSize(2));
+    }
+
 }

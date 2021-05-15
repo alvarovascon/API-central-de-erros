@@ -38,4 +38,10 @@ public class AbstractTest {
         public EventIds() {
         }
     }
+
+    public static class EventLevels {
+        public static String WARNING = "warning";
+        public static String INFO = "info";
+        public static String ERROR = "error";
+    }
 }
