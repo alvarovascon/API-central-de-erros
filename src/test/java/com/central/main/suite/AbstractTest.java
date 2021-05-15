@@ -29,4 +29,13 @@ public class AbstractTest {
         public UserEmails() {
         }
     }
+
+    public static class EventIds {
+        public static Long ONE = 1L;
+        public static Long TWO = 2L;
+        public static Long THREE = 3L;
+
+        public EventIds() {
+        }
+    }
 }
