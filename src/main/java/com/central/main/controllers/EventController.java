@@ -43,7 +43,7 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    private final String NOT_FOUND = "Não encontrado";
+    private final String UNAUTHORIZED = "Não autorizado";
     private final String SUCCESS = "SUCCESS";
 
     private Page<EventDTO> getDTOsPage (Page<Event> events) {
@@ -54,7 +54,7 @@ public class EventController {
 
     @GetMapping
     @ApiOperation("Lista eventos de erro")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findAll(EventPage eventPage) {
         Page<Event> events = this.eventService.findAll(eventPage);
@@ -63,7 +63,7 @@ public class EventController {
 
     @GetMapping("/{id}")
     @ApiOperation("Busca evento de erro por id")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Event> findById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(this.eventService.findById(id)
@@ -72,7 +72,7 @@ public class EventController {
 
     @GetMapping("level/{level}")
     @ApiOperation("Busca eventos por nível(level)")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByLevel(@PathVariable("level") String level, EventPage eventPage) {
         Page<Event> events = this.eventService.findByLevel(level, eventPage);
@@ -81,7 +81,7 @@ public class EventController {
 
     @GetMapping("/log/{log}")
     @ApiOperation("Busca eventos por log")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByLog(@PathVariable("log") String log, EventPage eventPage) {
         Page<Event> events = this.eventService.findByLog(log, eventPage);
@@ -90,7 +90,7 @@ public class EventController {
 
     @GetMapping("/origin/{origin}")
     @ApiOperation("Busca eventos por origem")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByOrigin(@PathVariable("origin") String origin, EventPage eventPage) {
         Page<Event> events = this.eventService.findByOrigin(origin, eventPage);
@@ -99,7 +99,7 @@ public class EventController {
 
     @GetMapping("/date/{date}")
     @ApiOperation("Busca eventos por data")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Page<EventDTO>> findByDate(@PathVariable("date") Timestamp date, EventPage eventPage) {
         Page<Event> events = this.eventService.findByEventDateContaining(date, eventPage);
@@ -108,7 +108,7 @@ public class EventController {
 
     @GetMapping("/count/{level}")
     @ApiOperation("Retorna número de eventos por nível")
-    @ApiResponses(value = {@ApiResponse(code = 404, message = NOT_FOUND),
+    @ApiResponses(value = {@ApiResponse(code = 401, message = UNAUTHORIZED),
             @ApiResponse(code = 200, message = SUCCESS)})
     public ResponseEntity<Integer> getByLevelCount(@PathVariable("level") String level) {
         return new ResponseEntity<>(this.eventService.getByLevelCount(level), HttpStatus.OK);
